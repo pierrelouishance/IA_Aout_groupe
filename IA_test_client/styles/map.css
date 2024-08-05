@@ -1,0 +1,140 @@
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin: 3vh;
+
+}
+
+
+#middle_div{
+    position:relative;
+    display:inline-block;
+}
+#map{
+    background-image: url('../image/carte.png') ;
+    background-size: cover;
+    height: 76vh;
+    width:110vh;
+    float:left;
+    background-size: cover;
+    position: relative; 
+    align-items: left;
+    margin-right:1vh;
+}
+
+
+#info{
+    position:relative;
+    height: 76vh;
+    width:30vh;
+    background-color: blue;
+    float:left;
+    border: 1px solid black;
+}
+.info{
+    width:30vh;
+    height:19vh;
+    background-color: lightblue;
+}
+
+#info1{
+    background-color:lightblue;
+}
+
+#info2{
+    background-color:orange;
+}
+
+#info3{
+    background-color:red;
+}
+
+#info4{
+    background-color:white;
+}
+
+#input_user{
+    height:10vh;
+}
+/* style des textes */
+
+.info p{
+    margin:0%;
+    padding-top : 1vh;
+    font-size: 1.8vh;
+}
+
+/* style des pions représentant les cyclistes*/
+
+.pion{
+    background-color: yellow;
+    width: 1.5%;
+    height: 2%;
+    border-radius: 10px;
+    position:absolute;
+}
+#p11{
+    background-color: lightblue;
+    left:34%;
+    top:44%;
+}
+#p12{
+    background-color: lightblue;
+    left:34%;
+    top:44%;
+}
+#p13{
+    background-color: lightblue;
+    left:34%;
+    top:44%;
+}
+#p21{
+    background-color: orange;
+    left:34%;
+    top:44%;
+}
+#p22{
+    background-color:orange;
+    left:34%;
+    top:44%;
+}
+#p23{
+    background-color: orange;
+    left:34%;
+    top:44%;
+}
+#p31{
+    background-color: red;
+    left:34%;
+    top:44%;
+}
+#p32{
+    background-color: red;
+    left:34%;
+    top:44%;
+}
+#p33{
+    background-color: red;
+    left:34%;
+    top:44%;
+}
+#p41{
+    background-color: white;
+    left:34%;
+    top:44%;
+}
+#p42{
+    background-color: white;
+    left:34%;
+    top:44%;
+}
+#p43{
+    background-color:white;
+    left:34%;
+    top:44%;
+}

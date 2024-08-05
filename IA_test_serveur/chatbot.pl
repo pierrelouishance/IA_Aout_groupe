@@ -1,0 +1,1 @@
+chat(Phrase,Phrase).
