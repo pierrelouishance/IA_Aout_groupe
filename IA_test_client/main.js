@@ -5,7 +5,7 @@ Le format de ces listes est [numéro_équipe, numéro_cycliste, position, coté,
 les 4 dernières listes contiennent les informations sur les cartes disponibles pour chaque joueur
 Ce format nous permet de communiquer avec prolog en envoyant une seule variable
 */
-let plateau = [[1,1,32,1,0],[1,2,35,0,1],[1,3,40,0,0],[2,1,2,0,1],[2,2,1,0,0],[2,3,1,0,1],[3,1,38,1,0],[3,2,47,1,0],[3,3,53,1,0],[4,1,2,1,0],[4,2,10,0,1],[4,3,87,1,1],[],[],[],[]]
+let plateau = [[1,1,0,0,0],[1,2,0,0,0],[1,3,0,0,0],[2,1,0,0,0],[2,2,0,0,0],[2,3,0,0,1],[3,1,0,0,0],[3,2,0,0,0],[3,3,0,0,0],[4,1,0,0,0],[4,2,0,0,0],[4,3,0,0,0],[],[],[],[]]
 // les cyclistes encore en jeu (qui n'ont pas déjà passé la lignes d'arrivées)
 let cyclistes = [[1,2,3],[1,2,3],[1,2,3],[1,2,3]]
 // // la listes des cyclistes arrives

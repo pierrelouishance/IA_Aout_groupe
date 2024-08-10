@@ -330,12 +330,12 @@ function cycliste_fini(equipe,cycliste){
         // on met fin à la partie si plus de cyclistes dispo pour personnes
         if (cyclistes[0].length===0 &&cyclistes[1].length===0 &&cyclistes[2].length===0 &&cyclistes[3].length===0 ){
             console.log("fini")
-            let valeurMax = Math.max(...scores);
-            let indexMax = scores.indexOf(valeurMax);
-            const vainqueur = nom_equipes[indexMax]
+            let valeurMin = Math.min(...scores);
+            let indexMin = scores.indexOf(valeurMin);
+            const vainqueur = nom_equipes[indexMin]
             fini = true
             $('#input_user').html('');
-            const bouton_jouer= '<p> La partie est finie voici les score'+scores+'le joueur '+vainqueur +' a gagné la partie avec '+scores[indexMax]+' points </p>'
+            const bouton_jouer= '<p> La partie est finie voici les score'+scores+'le joueur '+vainqueur +' a gagné la partie avec '+scores[indexMin]+' points </p>'
             const jouer = $(bouton_jouer)
             $("#input_user").append(jouer)
         }
@@ -351,6 +351,9 @@ function get_position(equipe,velo){
     const cote = cycliste[3]
     if(position==1 && cote ==0){
         return([31,44]);
+    }
+    else if(position==0){
+        return([34,50]);
     }
     else if(position==1 && cote ==1){
         return([34,44]);
