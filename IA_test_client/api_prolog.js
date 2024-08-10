@@ -238,11 +238,12 @@ async function deplacement_IA_4() {
     }
 
     }
-// deplacement_manuel([1,1,11,0,0],10,0,0)
-// deplacement_IA_2()
+
 
 
 // fonction pour interragir avec le chat_bot
+// param : la question envoyée au chatbot
+// effect : la réponse est affichée à l'écran
 async function chatbot(question) {
 
 

@@ -1,18 +1,4 @@
-// function handleSubmit() {
-//     // Récupérer la valeur de l'input
-//     const userInput = document.getElementById('input').value;
 
-//     // Logique pour générer la réponse (ici, toujours "ok")
-//     const response = userInput;
-
-//     // Afficher la réponse dans le div
-//     document.getElementById('response').innerText = response;
-// }
-
-// // Ajouter un écouteur d'événement sur le bouton submit
-// window.onload = function() {
-//     document.getElementById('submit_button_bot').addEventListener('click', handleSubmit);
-// }
 
 function extractResponse(result) {
     // Extraire la réponse de la variable Reponse du résultat Prolog

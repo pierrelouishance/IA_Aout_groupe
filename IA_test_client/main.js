@@ -26,8 +26,7 @@ let tour_premier_arrive=0
 let sprints= [[21,1,[2]],[35,2,[2,7]],[75,1,[6]]]
 // la listes des cases chances
 let casesChance = [ [9, 0], [10, 0], [11, 0], [12, 0],[15,1], [19, 2], [21, 2], [24, 0], [26, 0], [28, 0], [30, 0], [32, 0], [34, 0], [48, 0], [57, 0], [66, 0], [66, 1], [74, 0], [90, 1] ]; 
-// la réponse du chat bot 
-let reponse = ""
+
 
 // on affiche les info sur la page html 
 function afficherPlateau() {
@@ -40,14 +39,6 @@ function afficherPlateau() {
     const tour_string= "<p> tour de jeu " + tour_de_jeu+" tour du joueur "+ tour_joueur+ "</p>"
     const paragraph_tour = $(tour_string)
     $("#topdiv").append(paragraph_tour)
-    // on affiche les scores
-    // const score_string= "<p> score " + scores+" tour premier arrivé "+ tour_premier_arrive+ "</p>"
-    // const paragraph_score = $(score_string)
-    // $("#topdiv").append(paragraph_score)
-    // on affiche les joueurs dispo
-    // const dispo_string= "<p> joueurs dispo " + cyclistes+"</p>"
-    // const paragraph_dispo = $(dispo_string)
-    // $("#topdiv").append(paragraph_dispo)
 
     // on affiche les infos des équipes
     for (let joueur = 1;joueur<5;joueur++){

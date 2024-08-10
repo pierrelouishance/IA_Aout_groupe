@@ -36,11 +36,6 @@ vecteur_joueur_3(Plateau,Vecteur):-
     % max_joueur_list renvoie le meilleur vecteur du point de vue du coureur 1
     max_joueur_list(3,Liste_vecteurs,Vecteur).
 
-    % write(" le joueur 3 a analyse les vecteurs suivant :"),nl,
-    % write(Liste_vecteurs),nl,
-    % write("il a choisi le vecteur"),nl,
-    % write(Vecteur),nl,nl.
-
 
 % On donne le plateau la fonction renvoie le vecteur que le joueur 4 retournera dans l'arbre,
 % elle interroge pour chaque cas ce que renvoie le joueur 1
@@ -95,8 +90,7 @@ liste_des_vecteurs_possibles([Plateau_1|Reste_plateaux],2,[Vecteur_1|Reste_vecte
     vecteur_joueur_3(Plateau_1,Vecteur_1),
     liste_des_vecteurs_possibles(Reste_plateaux,2,Reste_vecteurs).
 
-% PLACEHOLDER on donne le plateau et le numéro du joueur et la fonction donne la listes des nouveaux plateaux possibles
-% TO DO : remplacer cette fonction par celle de Dehbia
+%on génères tous les plateaux possibles
 liste_des_nouveaux_plateau_possibles(Plateau,Equipe,Listes_nouveauxplateau):-
     generer_mouvements(Equipe,Plateau,Listes_nouveauxplateau).
 
@@ -107,29 +101,15 @@ liste_des_nouveaux_plateau_possibles(Plateau,Equipe,Listes_nouveauxplateau):-
 % Calculer le score pour une équipe
 % score_joueur(+Plateau, +Equipe, -Score)
 score_joueur(Plateau, Equipe, Score) :-
-    % write("equipe : "), 
-    % write(Equipe),nl,
     recuperer_les_coureurs_du_plateau(Plateau, First12Coureur),
     recuperer_les_coureurs_du_plateau_de_equipe_n(First12Coureur, Equipe, ListCoureursDeEquipe),
-    % write("listes des coureurs de cette equipe : "),
-    % write(ListCoureursDeEquipe),nl,
     Position_carte is 11 + Equipe,
     % on récupère les cartes secondes ici
     nth0(Position_carte, Plateau, CarteSecondeEquipe),  % Accéder à un élément spécifique du plateau
-    % write("liste des cartes secondes de cette equipe : "),
-    % write(CarteSecondeEquipe),nl,
     sum_list(CarteSecondeEquipe, SOMME),
-    % write("somme des cartes secondes de cette equipe : "),
-    % write(SOMME),nl,
     calcule_le_cout_de_la_chute(ListCoureursDeEquipe, First12Coureur, CoutChute),
-    % write("cout chute pour cette equipe : "),
-    % write(CoutChute),nl,
     cout_distance_parcourue(ListCoureursDeEquipe, CoutDistanceParcourue),
-    % write("cout pour la distance parcourue par les joueurs : "),
-    % write(CoutDistanceParcourue),nl,
     nombre_coureurs_qui_veut_prendre_de_la_vitesse(ListCoureursDeEquipe, CarteSecondeEquipe, First12Coureur, CoutVitesse),
-    % write("cout vitesse pour cette equipe : "),nl,
-    % write(CoutVitesse),nl,
     Score is SOMME + CoutChute + CoutDistanceParcourue + CoutVitesse.
 
 % Fonction heuristique 
@@ -188,8 +168,6 @@ prendre_de_la_vitesse(POSJOUEUR, CarteSecondeTire, Plateau, CoutDeLaVitesse) :-
  
     ( (CoureurPosition1 > 0, CoureurPosition2 > 0) ; (CoureurPosition1 > 0, CoureurPosition3 > 0) )
     -> (CoutDeLaVitesse = 5 )
-    % , write(" le joueur "), write(POSJOUEUR), write(" a pris de la vitesse grace a la carte : "),
-    % write(CarteSecondeTire)
     ;  CoutDeLaVitesse = 0.
 
 % Nombre de coureurs qui veulent prendre de la vitesse 
@@ -199,8 +177,6 @@ nombre_coureurs_qui_veut_prendre_de_la_vitesse(Liste_Coureurs,Liste_Carte,Platea
     extract_third_elements(Liste_Coureurs,Liste_POS),
     combine_lists_as_pairs(Liste_POS,Liste_Carte,Liste_combinaisons),
     split_pairs(Liste_combinaisons,Liste_POS_combi,Liste_Carte_combi),
-    % write("positions et cartes combi : "), 
-    % write(Liste_combinaisons),nl,
     recuperer_les_coureurs_du_plateau(Plateau, First12Coureur),
     nombre_coureurs_qui_veut_prendre_de_la_vitesse_helper(Liste_POS_combi,Liste_Carte_combi,First12Coureur,CoutTotal).
 

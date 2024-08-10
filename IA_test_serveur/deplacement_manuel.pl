@@ -69,7 +69,6 @@ remplacer_element_index_dans_plateau(Index, NouveauElement, Plateau,NouveauPlate
     append(Before, [NouveauElement|After], NouveauPlateau).  % Construire la nouvelle liste avec NewElem
 %mettre_a_jour_carte_seconde( +NumEquipe, +CaretSeconde,+Plateau, NouveauPlateau):-
 % upadate carte chance   
-%test 
 mettre_a_jour_carte_seconde( NumEquipe, CarteSeconde,Plateau, NouveauPlateau):-
     P is 11+NumEquipe,
     nth0(P, Plateau, Element),
@@ -105,7 +104,6 @@ chute([NumEquipe, NumCourreur, NouvellePosition, Cote, Imm], CarteSecondeTire, N
     (
         (Nombre < 1 -> 
             mettre_a_jour_carte_seconde(NumEquipe, CarteSecondeTire, Plateau, NouveauPlateau1),
-            % cote_libre(NouveauCote, Pos, NouveauPlateau1),
             mettre_a_jour_un_courreur([NumEquipe, NumCourreur, NouvellePosition, Cote, Imm], NouvellePosition, NouveauCote, 0, NouveauPlateau1, NouveauPlateau)
         );
         (Nombre >= 1 -> 
@@ -122,9 +120,7 @@ chute([NumEquipe, NumCourreur, NouvellePosition, Cote, Imm], CarteSecondeTire, N
 %%%%0%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 deplacement_manuel([NumEquipe, NumJoueur, PosJoueur, Cote, IMMobilise], CarteSecondeTire, CoteDeplacement, PrendreVitesse, Plateau, NouveauPlateau):- 
     PosJoueur >= 0,
-    PosJoueur < 127, % vérifier la position actuelle 
-    % ici calculer si il veut prendre de la vitesse ,
-    % prendre_de_la_vitesse(PrendreVitesse, PosJoueur,CarteSecondeTire, Plateau, NouvellePosVitesse),   
+    PosJoueur < 127, % vérifier la position actuelle  
     % voir si ça provoque une chute 
      % calculer la nouvelle position 
     NouvellePositionJoueur is PosJoueur + CarteSecondeTire + PrendreVitesse, % calculer la nouvelle position 

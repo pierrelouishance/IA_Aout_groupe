@@ -11,12 +11,9 @@
 % fonction qui calcul le score total pour un plateau fonction utilisée par le joueur 1 
  
 deplacement_IA_2(Plateau, Nouveau_plateau):-
-    % write('test'),
+
     liste_des_nouveaux_plateau_possibles(Plateau,2,Liste_plateaux),
-    % write('listes des nouveaux plateux : '),nl,
-    % write(Liste_plateaux),nl,
     liste_des_vecteurs_possibles(Liste_plateaux,2,Liste_vecteurs),
-    % max_joueur_list renvoie le meilleur vecteur du point de vue du coureur 2
     max_joueur_list(2,Liste_vecteurs,Vecteur),
     nth0(Index,Liste_vecteurs,Vecteur),
     nth0(Index,Liste_plateaux,Nouveau_plateau).
@@ -32,9 +29,7 @@ deplacement_IA_2(Plateau, Nouveau_plateau):-
 vecteur_joueur_3(Plateau,Vecteur):-
     liste_des_nouveaux_plateau_possibles(Plateau,3,Liste_plateaux),
     liste_des_vecteurs_possibles(Liste_plateaux,3,Liste_vecteurs),
-    % max_joueur_list renvoie le meilleur vecteur du point de vue du coureur 1
     max_joueur_list(3,Liste_vecteurs,Vecteur).
-
     % write(" le joueur 3 a analyse les vecteurs suivant :"),nl,
     % write(Liste_vecteurs),nl,
     % write("il a choisi le vecteur"),nl,
@@ -46,23 +41,15 @@ vecteur_joueur_3(Plateau,Vecteur):-
 vecteur_joueur_4(Plateau,Vecteur):-
     liste_des_nouveaux_plateau_possibles(Plateau,4,Liste_plateaux),
     liste_des_vecteurs_possibles(Liste_plateaux,4,Liste_vecteurs),
-    % max_joueur_list renvoie le meilleur vecteur du point de vue du coureur 1
     max_joueur_list(4,Liste_vecteurs,Vecteur).
-    % write(" le joueur 4 a analyse les vecteurs suivant :"),nl,
-    % write(Liste_vecteurs),nl,
-    % write("il a choisi le vecteur"),nl,
-    % write(Vecteur),nl,nl.
+
 
 % On donne le plateau la fonction renvoie le vecteur que le joueur 1 retournera dans l'arbre
 vecteur_joueur_1(Plateau,Vecteur):-
     liste_des_nouveaux_plateau_possibles(Plateau,1,Liste_plateaux),
     liste_des_vecteurs_possibles(Liste_plateaux,1,Liste_vecteurs),
-    % max_joueur_list renvoie le meilleur vecteur du point de vue du coureur 1
     max_joueur_list(1,Liste_vecteurs,Vecteur).
-    % write(" le joueur 1 a analyse les vecteurs suivant :"),nl,
-    % write(Liste_vecteurs),nl,
-    % write("il a choisi le vecteur"),nl,
-    % write(Vecteur),nl,nl.
+
 
 
 % on traite le cas ou le joueur 1 doit transformer ses plateaux en vecteurs:
@@ -87,21 +74,14 @@ liste_des_vecteurs_possibles([Plateau_1|Reste_plateaux],3,[Vecteur_1|Reste_vecte
 liste_des_vecteurs_possibles([],2,[]).
 %si le joueur 3 n'a plus de carte on génère les score direct
 liste_des_vecteurs_possibles([[E11,E12,E13,E21,E22,E23,E31,E32,E33,E41,E42,E43,C1,C2,[],C3]|Reste_plateaux],2,[Vecteur_1|Reste_vecteurs]):-
-    % write('test vide'),
     score_total([E11,E12,E13,E21,E22,E23,E31,E32,E33,E41,E42,E43,C1,C2,[],C3],Vecteur_1),
     liste_des_vecteurs_possibles(Reste_plateaux,2,Reste_vecteurs).
 %si le joueur 3 a encore des cartes
 liste_des_vecteurs_possibles([Plateau_1|Reste_plateaux],2,[Vecteur_1|Reste_vecteurs]):-
-    % write('test listes vecteurs possibles'),nl,
     vecteur_joueur_3(Plateau_1,Vecteur_1),
-    % write('plateau : '),
-    % write(Plateau_1),nl,
-    % write('vecteur :'),
-    % write(Vecteur_1),nl,
     liste_des_vecteurs_possibles(Reste_plateaux,2,Reste_vecteurs).
 
-% PLACEHOLDER on donne le plateau et le numéro du joueur et la fonction donne la listes des nouveaux plateaux possibles
-% TO DO : remplacer cette fonction par celle de Dehbia
+%On génère tous les plateaux possibles
 liste_des_nouveaux_plateau_possibles(Plateau,Equipe,Listes_nouveauxplateau):-
     generer_mouvements(Equipe,Plateau,Listes_nouveauxplateau).
 
@@ -117,20 +97,10 @@ score_joueur(Plateau, Equipe, Score) :-
     Position_carte is 11 + Equipe,
     % on récupère les cartes secondes ici
     nth0(Position_carte, Plateau, CarteSecondeEquipe),  % Accéder à un élément spécifique du plateau
-    % write("liste des cartes secondes de cette equipe : "),
-    % write(CarteSecondeEquipe),nl,
     sum_list(CarteSecondeEquipe, SOMME),
-    % write("somme des cartes secondes de cette equipe : "),
-    % write(SOMME),nl,
     calcule_le_cout_de_la_chute(ListCoureursDeEquipe, First12Coureur, CoutChute),
-    % write("cout chute pour cette equipe : "),
-    % write(CoutChute),nl,
     cout_distance_parcourue(ListCoureursDeEquipe, CoutDistanceParcourue),
-    % write("cout pour la distance parcourue par les joueurs : "),
-    % write(CoutDistanceParcourue),nl,
     nombre_coureurs_qui_veut_prendre_de_la_vitesse(ListCoureursDeEquipe, CarteSecondeEquipe, First12Coureur, CoutVitesse),
-    % write("cout vitesse pour cette equipe : "),nl,
-    % write(CoutVitesse),nl,
     Score is SOMME + CoutChute + CoutDistanceParcourue + CoutVitesse.
 
 % Fonction heuristique 
@@ -189,8 +159,6 @@ prendre_de_la_vitesse(POSJOUEUR, CarteSecondeTire, Plateau, CoutDeLaVitesse) :-
  
     ( (CoureurPosition1 > 0, CoureurPosition2 > 0) ; (CoureurPosition1 > 0, CoureurPosition3 > 0) )
     -> (CoutDeLaVitesse = 5 )
-    % , write(" le joueur "), write(POSJOUEUR), write(" a pris de la vitesse grace a la carte : "),
-    % write(CarteSecondeTire)
     ;  CoutDeLaVitesse = 0.
 
 % Nombre de coureurs qui veulent prendre de la vitesse 
@@ -200,8 +168,6 @@ nombre_coureurs_qui_veut_prendre_de_la_vitesse(Liste_Coureurs,Liste_Carte,Platea
     extract_third_elements(Liste_Coureurs,Liste_POS),
     combine_lists_as_pairs(Liste_POS,Liste_Carte,Liste_combinaisons),
     split_pairs(Liste_combinaisons,Liste_POS_combi,Liste_Carte_combi),
-    % write("positions et cartes combi : "), 
-    % write(Liste_combinaisons),nl,
     recuperer_les_coureurs_du_plateau(Plateau, First12Coureur),
     nombre_coureurs_qui_veut_prendre_de_la_vitesse_helper(Liste_POS_combi,Liste_Carte_combi,First12Coureur,CoutTotal).
 
@@ -330,16 +296,10 @@ toutes_les_combinaision_pour_un_joueur_une_carte([NE, NJ, POS, COTE, IMM], Carte
 
 % combinaison pour un joueur et une carte, renvoie une liste de 1 si pas d'aspi possible et une liste de deux si aspi possible (ici cas ou aspi n'est pas possible)
 toutes_les_combinaision_pour_un_joueur_une_carte([NE, NJ, POS, COTE, IMM], Carte, Plateau, Nv_Plateaux):-
-    % write('on test joueur : '),
-    % write(NJ),nl,
-    % write('carte'),
-    % write(Carte),nl,
 
     Arrivee is POS + Carte,
     liste_cote_accessible(POS,COTE,Arrivee,Liste_Cote),
     tous_les_deplacement_manuel_pour_une_liste_de_cote_sans_aspi([NE, NJ, POS, COTE, IMM],Carte, Liste_Cote,Plateau, Nv_Plateaux).
-    % recuperer_les_coureurs_du_plateau(Plateau, First12Coureur),
-    % prendre_de_la_vitesse(POS,Carte,First12Coureur,0),
     
 
 % prédicat pour obtenir le coureur le moins avance parmis une liste

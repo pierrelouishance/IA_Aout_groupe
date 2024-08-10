@@ -562,7 +562,7 @@ function get_position(equipe,velo){
     else if(position==27 && cote ==2){
         return([22,86])
     }
-    // ==========================================Position à rajouter==========================
+    
     else if(position==28 && cote ==0){
         return([30,76])
     }
@@ -961,10 +961,6 @@ function get_position(equipe,velo){
     	return ([83 ,8])
     }
 
-
-
-
-    // =======================================================================================
     else if(position==80 && cote ==0){
         return([77,16])
     }

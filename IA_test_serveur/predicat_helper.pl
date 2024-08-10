@@ -41,24 +41,17 @@ element_at(Index, [_|Tail], Elem) :-
 
 
 
-% sum_fifth_elements/2
-% sum_fifth_elements(+ListOfLists, -Sum)
-% ListOfLists: a list of lists, where each list has exactly five elements.
-% Sum: the sum of the fifth elements of each list in ListOfLists.
 
+% pour sommer le 5ème élément de chaque liste
 sum_fifth_elements(ListOfLists, Sum) :-
     sum_fifth_elements_helper(ListOfLists, 0, Sum).
 
-% sum_fifth_elements_helper/3
-% sum_fifth_elements_helper(+ListOfLists, +Acc, -Sum)
-% ListOfLists: a list of lists, where each list has exactly five elements.
-% Acc: accumulator for the sum.
-% Sum: the sum of the fifth elements of each list in ListOfLists.
 
-sum_fifth_elements_helper([], Acc, Acc).  % Base case: when the list is empty, the sum is the accumulator.
+
+sum_fifth_elements_helper([], Acc, Acc).  
 sum_fifth_elements_helper([[_, _, _, _, FifthElement] | Rest], Acc, Sum) :-
-    NewAcc is Acc + FifthElement,  % Add the fifth element to the accumulator.
-    sum_fifth_elements_helper(Rest, NewAcc, Sum).  % Recursive call with the rest of the list.
+    NewAcc is Acc + FifthElement,  
+    sum_fifth_elements_helper(Rest, NewAcc, Sum).
 
 % Combinations: List of all possible combinations of elements from List1 and List2, each represented as a list of two elements.
 
@@ -83,9 +76,9 @@ recuperer_les_coureurs_equipe_n_non_arrives([[NE,NJ,POS,COTE,Im]|REST], [[NE,NJ,
 split_pairs(Pairs, FirstElements, SecondElements) :-
     split_pairs_helper(Pairs, FirstElements, SecondElements).
 
-split_pairs_helper([], [], []).  % Base case: empty list results in two empty lists.
+split_pairs_helper([], [], []).  
 split_pairs_helper([[First, Second] | Rest], [First | FirstRest], [Second | SecondRest]) :-
-    split_pairs_helper(Rest, FirstRest, SecondRest).  % Recursive call with the rest of the list.
+    split_pairs_helper(Rest, FirstRest, SecondRest).  
 
 % pour une case de départ, un cote, une case d'arrivée, renvoie la liste des cotés accessibles
 liste_cote_accessible(_,_,Arrivee,[0,1,2]):-
