@@ -241,3 +241,34 @@ async function deplacement_IA_4() {
 // deplacement_manuel([1,1,11,0,0],10,0,0)
 // deplacement_IA_2()
 
+
+// fonction pour interragir avec le chat_bot
+async function chatbot(question) {
+
+
+  
+    try {
+        const response = await fetch("http://localhost:8080/http://localhost:8000", {
+            method: "POST",
+            body: JSON.stringify({ "predicat": "chat",question:question
+             }),
+            headers:  {
+                "Content-Type": "application/json",
+              },
+            
+          });
+        if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+        }
+    
+        const json = await response.json();
+        console.log(json)
+
+        displayResponse(json);           
+    } catch (error) {
+        console.error(error.message);
+    }
+
+
+    }
+

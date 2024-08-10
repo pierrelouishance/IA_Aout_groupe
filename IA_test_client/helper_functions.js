@@ -563,6 +563,403 @@ function get_position(equipe,velo){
         return([22,86])
     }
     // ==========================================Position à rajouter==========================
+    else if(position==28 && cote ==0){
+        return([30,76])
+    }
+    else if(position==28 && cote ==1){
+        return([30,80])
+    }
+    else if(position==28 && cote ==2){
+        return([30,87])
+    }
+
+    else if(position==29 && cote ==0){
+        return([33,76])
+    }
+    else if(position==29 && cote ==1){
+        return([33,79])
+    }
+    else if(position==29 && cote ==2){
+        return([34,86])
+    }
+    else if(position==30 && cote ==0){
+        return([35,74])
+    }
+    else if(position==30 && cote ==1){
+        return([36,78])
+    }
+    else if(position==30 && cote ==2){
+        return([37,86])
+    }
+    else if(position==31 && cote ==0){
+        return([39,74])
+    }
+    else if(position==31 && cote ==1){
+        return([39,77])
+    }
+    else if(position==31 && cote ==2){
+        return([39,85])
+    }
+    else if(position==32 && cote ==0){
+        return([42,74])
+    }
+    else if(position==32 && cote ==1){
+        return([42,77])
+    }
+    else if(position==32 && cote ==2){
+        return([42,85])
+    }
+    else if(position==33 && cote ==0){
+        return([45,74])
+    }
+    else if(position==33 && cote ==1){
+        return([45,77])
+    }
+    else if(position==33 && cote ==2){
+        return([45,85])
+    }
+
+    else if(position==34 && cote ==0){
+        return([48,74])
+    }
+    else if(position==34 && cote ==1){
+        return([48,77])
+    }
+    else if(position==34 && cote ==2){
+        return([48,85])
+    }
+
+    else if(position==35 && cote ==0){
+        return([52,74])
+    }
+    else if(position==35 && cote ==1){
+        return([52,77])
+    }
+    else if(position==35 && cote ==2){
+        return([52,85])
+    }
+    else if(position==36 && cote ==0){
+        return([55,79])
+    }
+    else if(position==36 && cote ==1){
+        return([54,84])
+    }
+   
+    else if(position==37 && cote ==0){
+        return([57,80])
+    }
+    else if(position==37 && cote ==1){
+        return([57,84])
+    }
+   
+    else if(position==38 && cote ==0){
+        return([60,81])
+    }
+    else if(position==38 && cote ==1){
+        return([60,85])
+    }
+    
+    else if(position==39 && cote ==0){
+        return([63,80])
+    }
+    else if(position==39 && cote ==1){
+        return([64,85])
+    }
+   
+
+    else if(position==40 && cote ==0){
+        return([66,78])
+    }
+    else if(position==40 && cote ==1){
+        return([68,81])
+    }
+   
+    else if(position==41 && cote ==0){
+        return([67,75])
+    }
+    else if(position==41 && cote ==1){
+        return([70,77])
+    }
+ 
+    else if(position==42 && cote ==0){
+        return([69,71])
+    }
+    else if(position==42 && cote ==1){
+        return([71,73])
+    }
+ 
+
+    else if(position==43 && cote ==0){
+        return([69,67])
+    }
+    else if(position==43 && cote ==1){
+        return([72,68])
+    }
+
+
+    else if(position==44 && cote ==0){
+        return([68,63])
+    }
+    else if(position==44 && cote ==1){
+        return([71,62])
+    }
+ 
+    else if(position==45 && cote ==0){
+        return([67,60])
+    }
+    else if(position==45 && cote ==1){
+        return([70,57])
+    }
+  
+
+    else if(position==46 && cote ==0){
+        return([65,56])
+    }
+    else if(position==46 && cote ==1){
+        return([67,54])
+    }
+
+
+    else if(position==47 && cote ==0){
+        return([63,52])
+    }
+    else if(position==47 && cote ==1){
+        return([65,49])
+    }
+
+    else if(position==48 && cote ==0){
+        return([61,46])
+    }
+    else if(position==48 && cote ==1){
+        return([64,45])
+    }
+ 
+    else if(position==49 && cote ==0){
+        return([61,41])
+    }
+    else if(position==49 && cote ==1){
+        return([64,40])
+    }
+
+
+    else if(position==50 && cote ==0){
+        return([62,35])
+    }
+    else if(position==50 && cote ==1){
+        return([64,36])
+    }
+
+
+    else if(position==51 && cote ==0){
+        return([65,29])
+    }
+    else if(position==51 && cote ==1){
+        return([67,33])
+    }
+
+
+    else if(position==52 && cote ==0){
+        return([69,26])
+    }
+    else if(position==52 && cote ==1){
+        return([70,30])
+    }
+
+
+    else if(position==53 && cote ==0){
+        return([74,26])
+    }
+    else if(position==53 && cote ==1){
+        return([73,30])
+    }
+
+
+    else if(position==54 && cote ==0){
+        return([78,30])
+    }
+    else if(position==54 && cote ==1){
+        return([76,34])
+    }
+
+
+    else if(position==55 && cote ==0){
+        return([80,35])
+    }
+    else if(position==55 && cote ==1){
+        return([78,38])
+    }
+ 
+
+    else if(position==56 && cote ==0){
+        return([81,42])
+    }
+    else if(position==56 && cote ==1){
+        return([78,42])
+    }
+
+    else if(position==57 && cote ==0){
+        return([81,46])
+    }
+    else if(position==57 && cote ==1){
+        return([79,47])
+    }
+  
+
+    else if(position==58 && cote ==0){
+        return([82,51])
+    }
+    else if(position==58 && cote ==1){
+        return([79,52])
+    }
+
+    else if(position==59 && cote ==0){
+        return([83,55])
+    }
+    else if(position==59 && cote ==1){
+        return([80,57])
+    }
+ 
+
+    else if(position==60 && cote ==0){
+        return([84,59])
+    }
+    else if(position==60 && cote ==1){
+        return([81,61])
+    }
+
+
+    else if(position==61 && cote ==0){
+        return([85,63])
+    }
+    else if(position==61 && cote ==1){
+        return([83,66])
+    }
+
+
+    else if(position==62 && cote ==0){
+        return([87,66])
+    }
+    else if(position==62 && cote ==1){
+        return([86,70])
+    }
+
+
+    else if(position==63 && cote ==0){
+        return([90,68])
+    }
+    else if(position==63 && cote ==1){
+        return([89,71])
+    }
+
+
+    else if(position==64 && cote ==0){
+        return([92,67])
+    }
+    else if(position==64 && cote ==1){
+        return([91,71])
+    }
+
+
+    else if(position==65 && cote ==0){
+        return([94,63])
+    }
+    else if(position==65 && cote ==1){
+        return([93,71])
+    }
+
+    else if(position==66 && cote ==0){
+        return([94,59])
+    }
+    else if(position==66 && cote ==1){
+        return([95,70])
+    }
+
+    else if(position==67 && cote ==0){
+        return([93,55])
+    }
+    else if(position==67 && cote ==1){
+        return([97,86])
+    }
+
+    else if(position==68 && cote ==0){
+        return([92,51])
+    }
+    else if(position==68 && cote ==1){
+        return([97,60])
+    }
+
+    else if(position==69 && cote ==0){
+        return([90,46])
+    }
+    else if(position==69 && cote ==1){
+        return([96,54])
+    }
+
+
+    else if(position==70 && cote ==0){
+        return([90,40])
+    }
+    else if(position==70 && cote ==1){
+        return([95,49])
+    }
+
+
+    else if(position==71 && cote ==0){
+        return([91,34])
+    }
+    else if(position==71 && cote ==1){
+        return([93,44])
+    }
+ 
+
+    else if(position==72 && cote ==0){
+        return([92,28])
+    }
+    else if(position==72 && cote ==1){
+        return([95,30])
+    }
+  
+
+    else if(position==73 && cote ==0){
+        return([94,23])
+    }
+  
+
+    else if(position==74 && cote ==0){
+        return([93,17])
+    }
+
+
+    else if(position==75 && cote ==0){
+        return([93,15])
+    }
+ 
+
+    else if(position==76 && cote ==0){
+        return([91,13])
+    }
+
+
+    else if(position==77 && cote ==0){
+        return([88,12])
+    }
+    else if(position==77 && cote ==1){
+        return([89,8])
+    }
+    
+    else if(position==78 && cote ==0){
+        return([86,11])
+    }
+    else if(position==78 && cote ==1){
+        return([86,8])
+    
+    }
+    else if(position==79 && cote ==0){
+        return([83,12])
+    }
+    else if(position==79 && cote ==1){
+    	return ([83 ,8])
+    }
 
 
 

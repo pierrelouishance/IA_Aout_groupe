@@ -10,6 +10,13 @@ body {
 
 }
 
+.chatbot{
+    position :relative;
+    height: 76vh;
+    width:30vh;
+    float:left;
+    left:10vh;
+}
 
 #middle_div{
     position:relative;

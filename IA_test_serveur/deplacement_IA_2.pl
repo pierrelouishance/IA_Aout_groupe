@@ -93,7 +93,7 @@ liste_des_vecteurs_possibles([[E11,E12,E13,E21,E22,E23,E31,E32,E33,E41,E42,E43,C
 %si le joueur 3 a encore des cartes
 liste_des_vecteurs_possibles([Plateau_1|Reste_plateaux],2,[Vecteur_1|Reste_vecteurs]):-
     % write('test listes vecteurs possibles'),nl,
-    score_total(Plateau_1,Vecteur_1),
+    vecteur_joueur_3(Plateau_1,Vecteur_1),
     % write('plateau : '),
     % write(Plateau_1),nl,
     % write('vecteur :'),
@@ -249,6 +249,26 @@ recuperer_les_coureurs_equipe_n_non_mobiliser([[NE,NJ,POS,COTE,0]|REST], [[NE,NJ
 
 
 % générer tous les mouvements d'une équipe de tous les coureurs avec et sans prise de vitesse 
+% ici pour l'IA 2,l'heuristique consiste à faire avancer le joueur disponible le moins avancé 
+generer_mouvements(2, Plateau, NouveauListesDeTousLesPlateauPossible) :-
+    % récupérer les coureurs de l'équipe N 
+    recuperer_les_coureurs_du_plateau(Plateau, ListCoureurs),
+    % récupérer la liste des coureurs 
+    recuperer_les_coureurs_du_plateau_de_equipe_n(ListCoureurs, 2, ListCoureursDeEquipeN),
+    % récupérer les coureurs de l'équipe qui ne sont pas immobilisés 
+    recuperer_les_coureurs_equipe_n_non_mobiliser(ListCoureursDeEquipeN, ListeCoureursNonImobiliser),
+    % récupérer la listes des joueurs non arrivés
+    recuperer_les_coureurs_equipe_n_non_arrives(ListeCoureursNonImobiliser,ListeCoureursNonImobiliserNonArrives),
+    % on récupère le joueut le moins avancé
+    recuperer_le_coureur_le_moins_avance(ListeCoureursNonImobiliserNonArrives,Coureur_le_moins_avance),
+    % récupérer les cartes secondes de l'équipe 
+    INDEX is 11 + 2, 
+    nth0(INDEX, Plateau, CarteSecondeEquipeN),
+ 
+    combinaison_possible(Coureur_le_moins_avance, CarteSecondeEquipeN, Plateau, NouveauListesDeTousLesPlateauPossible).
+
+% générer tous les mouvements d'une équipe de tous les coureurs avec et sans prise de vitesse 
+% ici c'est la génération de mouvements pour les autres joueurs donc on ne se conforme pas à l'heuristique d'avancer le joueur le moins avancé
 generer_mouvements(NumeroDeEquipe, Plateau, NouveauListesDeTousLesPlateauPossible) :-
     % récupérer les coureurs de l'équipe N 
     recuperer_les_coureurs_du_plateau(Plateau, ListCoureurs),
@@ -258,14 +278,11 @@ generer_mouvements(NumeroDeEquipe, Plateau, NouveauListesDeTousLesPlateauPossibl
     recuperer_les_coureurs_equipe_n_non_mobiliser(ListCoureursDeEquipeN, ListeCoureursNonImobiliser),
     % récupérer la listes des joueurs non arrivés
     recuperer_les_coureurs_equipe_n_non_arrives(ListeCoureursNonImobiliser,ListeCoureursNonImobiliserNonArrives),
+
     % récupérer les cartes secondes de l'équipe 
     INDEX is 11 + NumeroDeEquipe, 
     nth0(INDEX, Plateau, CarteSecondeEquipeN),
-    % fonction pour générer le nouveau plateau en lui passant 
-    % mise_a_jour_plateau(+ListeCourreurs, ListesCarteSeconde, Plateau, NouveauPlateau)
-    % write('juste avant les combinaisons, coureurs possibles et cartes possibles:'),nl,
-    % write(ListeCoureursNonImobiliser),nl,
-    % write(CarteSecondeEquipeN),nl,
+
     combinaison_possible(ListeCoureursNonImobiliserNonArrives, CarteSecondeEquipeN, Plateau, NouveauListesDeTousLesPlateauPossible).
 
 % toutes les combinaisons possibles 
@@ -325,7 +342,16 @@ toutes_les_combinaision_pour_un_joueur_une_carte([NE, NJ, POS, COTE, IMM], Carte
     % prendre_de_la_vitesse(POS,Carte,First12Coureur,0),
     
 
+% prédicat pour obtenir le coureur le moins avance parmis une liste
+recuperer_le_coureur_le_moins_avance([List], [List]).
 
-
-
-
+recuperer_le_coureur_le_moins_avance([List1, List2 | Rest], Max) :-
+    List1 = [_, _, Third1, _, _],
+    List2 = [_, _, Third2, _, _],
+    (   
+        Third1 =< Third2
+    ->  
+        recuperer_le_coureur_le_moins_avance([List1 | Rest], Max)
+    ;   
+        recuperer_le_coureur_le_moins_avance([List2 | Rest], Max)
+    ).

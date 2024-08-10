@@ -8,6 +8,7 @@
 :- use_module(deplacement_manuel).
 :- use_module(deplacement_IA_2).
 :- use_module(deplacement_IA_4).
+:- use_module(chatbot).
 
 
 :- http_handler(root(.),handle,[]).
@@ -42,6 +43,9 @@ reponse(deplacement_IA_4,json([_,plateau=Plateau]),json([plateau=Nouveau_Plateau
 
 reponse(deplacement_manuel,json([_,plateau=Plateau,etat_cycliste=Etat_cycliste,carte=Carte,cote=Cote,vitesse=Vitesse]),json([ plateau=Nouveau_Plateau])):-
    deplacement_manuel(Etat_cycliste,Carte,Cote,Vitesse,Plateau,Nouveau_Plateau).
+
+reponse(chat,json([_,question=Question]),json([reponse=Reponse])):-
+   tourdefrance(Question,Reponse). 
 
 reponse(_,_,json([plateau="predicat non reconnu"])).
 

@@ -80,7 +80,7 @@ liste_des_vecteurs_possibles([[E11,E12,E13,E21,E22,E23,E31,E32,E33,E41,E42,E43,[
     liste_des_vecteurs_possibles(Reste_plateaux,4,Reste_vecteurs).
 %si le joueur 1 a encore des cartes(profondeur)
 liste_des_vecteurs_possibles([Plateau_1|Reste_plateaux],4,[Vecteur_1|Reste_vecteurs]):-
-    score_total(Plateau_1,Vecteur_1),
+    vecteur_joueur_1(Plateau_1,Vecteur_1),
     liste_des_vecteurs_possibles(Reste_plateaux,4,Reste_vecteurs).
 
 % on traite le cas ou le joueur 3 doit transformer ses plateaux en vecteurs:
@@ -248,6 +248,24 @@ recuperer_les_coureurs_equipe_n_non_mobiliser([[NE,NJ,POS,COTE,0]|REST], [[NE,NJ
 
 
 % générer tous les mouvements d'une équipe de tous les coureurs avec et sans prise de vitesse 
+generer_mouvements(4, Plateau, NouveauListesDeTousLesPlateauPossible) :-
+    % récupérer les coureurs de l'équipe N 
+    recuperer_les_coureurs_du_plateau(Plateau, ListCoureurs),
+    % récupérer la liste des coureurs 
+    recuperer_les_coureurs_du_plateau_de_equipe_n(ListCoureurs, 4, ListCoureursDeEquipeN),
+    % récupérer les coureurs de l'équipe qui ne sont pas immobilisés 
+    recuperer_les_coureurs_equipe_n_non_mobiliser(ListCoureursDeEquipeN, ListeCoureursNonImobiliser),
+    % récupérer la listes des joueurs non arrivés
+    recuperer_les_coureurs_equipe_n_non_arrives(ListeCoureursNonImobiliser,ListeCoureursNonImobiliserNonArrives),
+    % récupérer les cartes secondes de l'équipe 
+    INDEX is 11 + 4, 
+    nth0(INDEX, Plateau, CarteSecondeEquipeN),
+    % pour l'IA 4 l'heuristique consite à utiliser sa carte seconde la plus haute à chaque tour
+    recuperer_carte_seconde_la_plus_haute(CarteSecondeEquipeN,Carte_haute),
+    combinaison_possible(ListeCoureursNonImobiliserNonArrives, Carte_haute, Plateau, NouveauListesDeTousLesPlateauPossible).
+
+% générer tous les mouvements d'une équipe de tous les coureurs avec et sans prise de vitesse 
+% cas générale on n'impose pas de prendre la carte la plus élevé 
 generer_mouvements(NumeroDeEquipe, Plateau, NouveauListesDeTousLesPlateauPossible) :-
     % récupérer les coureurs de l'équipe N 
     recuperer_les_coureurs_du_plateau(Plateau, ListCoureurs),
@@ -260,11 +278,7 @@ generer_mouvements(NumeroDeEquipe, Plateau, NouveauListesDeTousLesPlateauPossibl
     % récupérer les cartes secondes de l'équipe 
     INDEX is 11 + NumeroDeEquipe, 
     nth0(INDEX, Plateau, CarteSecondeEquipeN),
-    % fonction pour générer le nouveau plateau en lui passant 
-    % mise_a_jour_plateau(+ListeCourreurs, ListesCarteSeconde, Plateau, NouveauPlateau)
-    % write('juste avant les combinaisons, coureurs possibles et cartes possibles:'),nl,
-    % write(ListeCoureursNonImobiliser),nl,
-    % write(CarteSecondeEquipeN),nl,
+
     combinaison_possible(ListeCoureursNonImobiliserNonArrives, CarteSecondeEquipeN, Plateau, NouveauListesDeTousLesPlateauPossible).
 
 % toutes les combinaisons possibles 
@@ -282,35 +296,16 @@ toutes_les_combinaison_un_coureur_et_une_liste_de_carte([NE, NJ, POS, COTE, IMM]
     toutes_les_combinaison_un_coureur_et_une_liste_de_carte([NE, NJ, POS, COTE, IMM], ListesCarteSeconde, Plateau, Listes_reste), 
     append(Listes_plateau,Listes_reste,Listes_nouveauxplateau).
   
-% pour obtenir la liste des nouveaux plateaux possibles sur base d'un joueur, d'une carte, et d'un plateau  
-% tous_les_deplacement_manuel_pour_une_liste_de_cote_sans_aspi([NE, NJ, POS, COTE, IMM],Carte, [],Plateau, []).
-% tous_les_deplacement_manuel_pour_une_liste_de_cote_sans_aspi([NE, NJ, POS, COTE, IMM],Carte, [Cote_1|Reste_Cote],Plateau,[Plateau_1|RestePlateaux]):-
-%     deplacement_manuel([NE, NJ, POS, COTE, IMM],Carte,Cote_1,0,Plateau,Plateau_1),
-%     tous_les_deplacement_manuel_pour_une_liste_de_cote_sans_aspi([NE, NJ, POS, COTE, IMM],Carte, Reste_Cote,Plateau, RestePlateaux).
+% Base case: If there's only one element, it is the maximum.
+recuperer_carte_seconde_la_plus_haute([Max], [Max]).
 
-% tous_les_deplacement_manuel_pour_une_liste_de_cote_avec_aspi([NE, NJ, POS, COTE, IMM],Carte, [],Plateau, []).
-% tous_les_deplacement_manuel_pour_une_liste_de_cote_avec_aspi([NE, NJ, POS, COTE, IMM],Carte, [Cote_1|Reste_Cote],Plateau,[Plateau_1,Plateau_2|RestePlateaux]):-
-%     deplacement_manuel([NE, NJ, POS, COTE, IMM],Carte,Cote_1,0,Plateau,Plateau_1),
-%     deplacement_manuel([NE, NJ, POS, COTE, IMM],Carte,Cote_1,1,Plateau,Plateau_2),
-%     tous_les_deplacement_manuel_pour_une_liste_de_cote_avec_aspi([NE, NJ, POS, COTE, IMM],Carte, Reste_Cote,Plateau, RestePlateaux).
-
-
-% combinaison pour un joueur et une carte, renvoie une liste de 1 si pas d'aspi possible et une liste de deux si aspi possible (ici cas ou aspi est possible)
-% toutes_les_combinaision_pour_un_joueur_une_carte([NE, NJ, POS, COTE, IMM], Carte, Plateau, Nv_Plateaux):-
-%     recuperer_les_coureurs_du_plateau(Plateau, First12Coureur),
-%     prendre_de_la_vitesse(POS,Carte,First12Coureur,5),
-%     Arrivee is POS + Carte,
-%     liste_cote_accessible(POS,COTE,Arrivee,Liste_Cote),
-%     tous_les_deplacement_manuel_pour_une_liste_de_cote_avec_aspi([NE, NJ, POS, COTE, IMM],Carte, Liste_Cote,Plateau, Nv_Plateaux).
-
-% % combinaison pour un joueur et une carte, renvoie une liste de 1 si pas d'aspi possible et une liste de deux si aspi possible (ici cas ou aspi n'est pas possible)
-% toutes_les_combinaision_pour_un_joueur_une_carte([NE, NJ, POS, COTE, IMM], Carte, Plateau, Nv_Plateaux):-
-%     Arrivee is POS + Carte,
-%     liste_cote_accessible(POS,COTE,Arrivee,Liste_Cote),
-%     tous_les_deplacement_manuel_pour_une_liste_de_cote_sans_aspi([NE, NJ, POS, COTE, IMM],Carte, Liste_Cote,Plateau, Nv_Plateaux).
-%     % recuperer_les_coureurs_du_plateau(Plateau, First12Coureur),
-%     % prendre_de_la_vitesse(POS,Carte,First12Coureur,0),
-    
+% Recursive case: Compare the first two elements and keep the larger one.
+recuperer_carte_seconde_la_plus_haute([H1, H2 | T], Max) :-
+    H1 >= H2,
+    recuperer_carte_seconde_la_plus_haute([H1 | T], Max).
+recuperer_carte_seconde_la_plus_haute([H1, H2 | T], Max) :-
+    H1 < H2,
+    recuperer_carte_seconde_la_plus_haute([H2 | T], Max).
 
 
 
